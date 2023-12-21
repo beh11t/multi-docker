@@ -10,18 +10,18 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Postgres Client Setup
-const { Pool } = require('pg');
-const pgClient = new Pool({
-  user: keys.pgUser,
-  host: keys.pgHost,
-  database: keys.pgDatabase,
-  password: keys.pgPassword,
-  port: keys.pgPort,
-  ssl:
-    process.env.NODE_ENV !== 'dev'
-      ? false
-      : { rejectUnauthorized: false },
-});
+// const { Pool } = require('pg');
+// const pgClient = new Pool({
+//   user: keys.pgUser,
+//   host: keys.pgHost,
+//   database: keys.pgDatabase,
+//   password: keys.pgPassword,
+//   port: keys.pgPort,
+//   ssl:
+//     process.env.NODE_ENV !== 'dev'
+//       ? false
+//       : { rejectUnauthorized: false },
+// });
 // const pgClient = new Pool({
 //   user: keys.pgUser,
 //   host: keys.pgHost,
@@ -30,6 +30,16 @@ const pgClient = new Pool({
 //   port: keys.pgPort,
 //   ssl: { rejectUnauthorized: false },
 // });
+const pgClient = new Pool({
+  user: keys.pgUser,
+  host: keys.pgHost,
+  database: keys.pgDatabase,
+  password: keys.pgPassword,
+  port: keys.pgPort,
+ 
+  // ssl: process.env.NODE_ENV !== 'production' ? false : { rejectUnauthorized: false },
+  // ssl: { rejectUnauthorized: false },
+});
 
 pgClient.on('connect', (client) => {
   client
